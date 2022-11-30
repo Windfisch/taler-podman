@@ -1,0 +1,18 @@
+version: "3"
+services:
+  postgres:
+    image: "docker.io/postgres:15"
+    volumes:
+    - "./data/postgres:/var/lib/postgresql/data"
+    - "./postgres:/docker-entrypoint-initdb.d"
+    environment:
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      SANDBOX_DB_PASSWORD: "${SANDBOX_DB_PASSWORD}"
+  libeufin_sandbox:
+    image: "libeufin-sandbox"
+    environment:
+      LIBEUFIN_SANDBOX_ADMIN_PASSWORD: "${SANDBOX_ADMIN_PASSWORD}"
+      LIBEUFIN_SANDBOX_DB_CONNECTION: "jdbc:postgresql://postgres/sandbox?user=sandbox&password=${SANDBOX_DB_PASSWORD}"
+
+# vim: expandtab:sw=2
