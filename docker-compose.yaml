@@ -14,5 +14,10 @@ services:
     environment:
       LIBEUFIN_SANDBOX_ADMIN_PASSWORD: "${SANDBOX_ADMIN_PASSWORD}"
       LIBEUFIN_SANDBOX_DB_CONNECTION: "jdbc:postgresql://postgres/sandbox?user=sandbox&password=${SANDBOX_DB_PASSWORD}"
+      ACCOUNT_NAME: jrluser
+      EBICS_PARTNER: partner01
+      EBICS_USER: user02
+      EBICS_HOST: testhost
+
 
 # vim: expandtab:sw=2
