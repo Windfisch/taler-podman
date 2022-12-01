@@ -7,17 +7,39 @@ services:
     - "./postgres:/docker-entrypoint-initdb.d"
     environment:
       PGDATA: "/var/lib/postgresql/data/pgdata"
+      # provides:
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
       SANDBOX_DB_PASSWORD: "${SANDBOX_DB_PASSWORD}"
+      NEXUS_DB_PASSWORD: "${NEXUS_DB_PASSWORD}"
   libeufin_sandbox:
     image: "libeufin-sandbox"
     environment:
-      LIBEUFIN_SANDBOX_ADMIN_PASSWORD: "${SANDBOX_ADMIN_PASSWORD}"
+      # consumes:
       LIBEUFIN_SANDBOX_DB_CONNECTION: "jdbc:postgresql://postgres/sandbox?user=sandbox&password=${SANDBOX_DB_PASSWORD}"
+      # provides:
+      LIBEUFIN_SANDBOX_ADMIN_PASSWORD: "${SANDBOX_ADMIN_PASSWORD}"
       ACCOUNT_NAME: jrluser
       EBICS_PARTNER: partner01
       EBICS_USER: user02
       EBICS_HOST: testhost
+  libeufin_nexus:
+    image: "libeufin-nexus"
+    environment:
+      # consumes:
+      LIBEUFIN_NEXUS_DB_CONNECTION: "jdbc:postgresql://postgres/nexus?user=nexus&password=${NEXUS_DB_PASSWORD}"
+      ACCOUNT_NAME: jrluser
+      EBICS_URL: "http://libeufin_sandbox:5016/ebicsweb"
+      EBICS_PARTNER: partner01
+      EBICS_USER: user02
+      EBICS_HOST: testhost
+      # provides:
+      ADMIN_USER: admin
+      ADMIN_PASSWORD: "${NEXUS_ADMIN_PASSWORD}"
+      TALER_USER: taler
+      TALER_PASSWORD: "${NEXUS_TALER_PASSWORD}"
+      CONNECTION_NAME: myconnection
+      ACCOUNT_NICKNAME: nickname
+      TALER_FACADE_NAME: taler-facade
 
 
 # vim: expandtab:sw=2
