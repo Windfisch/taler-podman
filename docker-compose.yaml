@@ -11,6 +11,7 @@ services:
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
       SANDBOX_DB_PASSWORD: "${SANDBOX_DB_PASSWORD}"
       NEXUS_DB_PASSWORD: "${NEXUS_DB_PASSWORD}"
+      EXCHANGE_DB_PASSWORD: "${EXCHANGE_DB_PASSWORD}"
   libeufin_sandbox:
     image: "libeufin-sandbox"
     environment:
@@ -19,6 +20,7 @@ services:
       # provides:
       LIBEUFIN_SANDBOX_ADMIN_PASSWORD: "${SANDBOX_ADMIN_PASSWORD}"
       ACCOUNT_NAME: jrluser
+      ACCOUNT_IBAN: "${MYIBAN}"
       EBICS_PARTNER: partner01
       EBICS_USER: user02
       EBICS_HOST: testhost
@@ -40,6 +42,19 @@ services:
       CONNECTION_NAME: myconnection
       ACCOUNT_NICKNAME: nickname
       TALER_FACADE_NAME: taler-facade
-
+  exchange:
+    image: "taler-exchange-insecure"
+    ports:
+      - "8081:8081"
+    environment:
+      # provides:
+      BASE_URL: "http://localhost:8081"
+      # consumes:
+      MYIBAN: "${MYIBAN}"
+      MYCURRENCY: "${MYCURRENCY}"
+    volumes:
+      # consumes NEXUS_DB_PASSWORD, NEXUS_TALER_PASSWORD, MYCURRENCY, MYIBAN via make_env.sh
+      - ./exchange-config:/etc/taler/
+      - ./data/taler:/var/lib/taler/
 
 # vim: expandtab:sw=2

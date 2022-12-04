@@ -18,7 +18,7 @@ else
 		libeufin-cli sandbox ebicshost create --host-id $EBICS_HOST
 
 	LIBEUFIN_SANDBOX_USERNAME=$ACCOUNT_NAME LIBEUFIN_SANDBOX_PASSWORD=`pwgen -s 20`\
-		libeufin-cli sandbox --sandbox-url $LIBEUFIN_SANDBOX_URL/demobanks/default demobank register
+		libeufin-cli sandbox --sandbox-url $LIBEUFIN_SANDBOX_URL/demobanks/default demobank register --iban $ACCOUNT_IBAN
 
 	LIBEUFIN_SANDBOX_USERNAME=admin LIBEUFIN_SANDBOX_PASSWORD="$LIBEUFIN_SANDBOX_ADMIN_PASSWORD"\
 		libeufin-cli sandbox --sandbox-url $LIBEUFIN_SANDBOX_URL/demobanks/default demobank new-ebicssubscriber --host-id $EBICS_HOST --partner-id $EBICS_PARTNER --user-id $EBICS_USER --bank-account $ACCOUNT_NAME
