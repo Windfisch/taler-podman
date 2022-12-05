@@ -24,6 +24,8 @@ services:
       EBICS_PARTNER: partner01
       EBICS_USER: user02
       EBICS_HOST: testhost
+    ports:
+      - "5016:5016"
   libeufin_nexus:
     image: "libeufin-nexus"
     environment:
