@@ -33,6 +33,7 @@ podman-compose up
 
 ## Withdrawing money
 
+Point your wallet to `http://yourhostname:8081`.
 After initiating the withdrawal in your wallet, you are asked to make a wire transfer to
 the bank's account using a provided subject.
 
@@ -76,3 +77,5 @@ This setup defeats some security features Taler offers, in order to simplify the
   keys rather than only providing them with a signing/decryption oracle.
 
 Additionally, this setup never renews coins. Coins expire in 2024.
+
+Setup is racy and races are mitigated using sleep. This is as reliable as it sounds.
