@@ -34,12 +34,12 @@ taler-exchange-httpd -L DEBUG -l /dev/stdout | tee /var/log/taler-exchange-httpd
 	set -e
 	sleep 3
 	echo "Doing taler-offline setup, $MYCURRENCY, $MYIBAN"
-	taler-exchange-offline download | taler-exchange-offline sign | taler-exchange-offline upload
-	taler-exchange-offline enable-account payto://iban/$MYIBAN?receiver-name=MyExchange | taler-exchange-offline upload
-	for i in `seq 2022 2100`; do
+	taler-exchange-offline enable-account $(taler-config -s exchange-account-1 -o payto_uri) | taler-exchange-offline upload
+	for i in 2022 2023; do
 		taler-exchange-offline wire-fee $i iban $MYCURRENCY:0 $MYCURRENCY:0 | taler-exchange-offline upload
-		taler-exchange-offline global-fee $i MANA:0 MANA:0 MANA:0 365d 365d 100 | taler-exchange-offline upload
+		taler-exchange-offline global-fee $i $MYCURRENCY:0 $MYCURRENCY:0 $MYCURRENCY:0 2h 1year 100 | taler-exchange-offline upload
 	done
+	taler-exchange-offline download | taler-exchange-offline sign | taler-exchange-offline upload
 	echo "taler-offline setup complete :)"
 	while true; do sleep 100; done
 } &
