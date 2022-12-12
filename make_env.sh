@@ -2,6 +2,8 @@
 
 echo Creating .env
 
+rm -f .env
+
 cat <<-FNORD >> .env
 export POSTGRES_PASSWORD='`pwgen -s 20`'
 export SANDBOX_ADMIN_PASSWORD='`pwgen -s 20`'
