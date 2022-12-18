@@ -17,6 +17,8 @@ services:
     environment:
       # consumes:
       LIBEUFIN_SANDBOX_DB_CONNECTION: "jdbc:postgresql://postgres/sandbox?user=sandbox&password=${SANDBOX_DB_PASSWORD}"
+      EXCHANGE_URL: "https://taler.windfis.ch/"
+      PAYTO_URL: "payto://iban/${MYIBAN}?receiver-name=MyExchange"
       # provides:
       LIBEUFIN_SANDBOX_ADMIN_PASSWORD: "${SANDBOX_ADMIN_PASSWORD}"
       ACCOUNT_NAME: jrluser
