@@ -79,3 +79,13 @@ This setup defeats some security features Taler offers, in order to simplify the
 Additionally, this setup never renews coins. Coins expire in 2024.
 
 Setup is racy and races are mitigated using sleep. This is as reliable as it sounds.
+
+
+
+# Merchant backend
+
+Start the container using
+
+``` 
+docker run -e TOKEN=YOUR_TOKEN_HERE -e EXCHANGE_URL=https://your-exchange.org/ --rm -it -p 8888:8888 taler-merchant
+```
