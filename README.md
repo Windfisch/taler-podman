@@ -9,7 +9,7 @@ Build the containers:
 
 ```bash
 for i in libeufin-{base,sandbox,nexus} taler-exchange-insecure; do
-	podman build --tag $i:latest -f $i.Dockerfile
+	podman build --tag "$i"':'"latest" -f $i.Dockerfile
 done
 ```
 
