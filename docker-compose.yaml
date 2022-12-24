@@ -17,6 +17,7 @@ services:
     environment:
       # consumes:
       LIBEUFIN_SANDBOX_DB_CONNECTION: "jdbc:postgresql://postgres/sandbox?user=sandbox&password=${SANDBOX_DB_PASSWORD}"
+      MYCURRENCY: "${MYCURRENCY}"
       EXCHANGE_URL: "https://taler.windfis.ch/"
       PAYTO_URL: "payto://iban/${MYIBAN}?receiver-name=MyExchange"
       # provides:
@@ -33,6 +34,7 @@ services:
     environment:
       # consumes:
       LIBEUFIN_NEXUS_DB_CONNECTION: "jdbc:postgresql://postgres/nexus?user=nexus&password=${NEXUS_DB_PASSWORD}"
+      MYCURRENCY: "${MYCURRENCY}"
       ACCOUNT_NAME: jrluser
       EBICS_URL: "http://libeufin_sandbox:5016/ebicsweb"
       EBICS_PARTNER: partner01

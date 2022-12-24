@@ -22,11 +22,9 @@ else
 	libeufin-cli connections import-bank-account --offered-account-id $ACCOUNT_NAME --nexus-bank-account-id $ACCOUNT_NICKNAME $CONNECTION_NAME  &&
 	libeufin-cli accounts task-schedule $ACCOUNT_NICKNAME --task-type submit --task-name submit-payments-each-second --task-cronspec "* * *"  &&
 	libeufin-cli accounts task-schedule $ACCOUNT_NICKNAME --task-type fetch --task-name fetch-reports-each-second --task-cronspec "* * *" --task-param-level report --task-param-range-type latest  &&
-	libeufin-cli facades new-taler-wire-gateway-facade --currency MANA --facade-name $TALER_FACADE_NAME $CONNECTION_NAME $ACCOUNT_NICKNAME  &&
-	#libeufin-cli facades new-anastasis-facade --currency MANA --facade-name ana-facade $CONNECTION_NAME $ACCOUNT_NICKNAME  &&
+	libeufin-cli facades new-taler-wire-gateway-facade --currency $MYCURRENCY --facade-name $TALER_FACADE_NAME $CONNECTION_NAME $ACCOUNT_NICKNAME  &&
 	libeufin-cli users create $TALER_USER --password $TALER_PASSWORD  &&
 	libeufin-cli permissions grant user $TALER_USER facade $TALER_FACADE_NAME facade.talerWireGateway.history  &&
 	libeufin-cli permissions grant user $TALER_USER facade $TALER_FACADE_NAME facade.talerWireGateway.transfer  &&
-	#libeufin-cli permissions grant user myuser facade ana-facade facade.anastasis.history  &&
 	echo "Nexus has been set up successfully" || echo "FAILED TO SET UP NEXUS"
 fi
