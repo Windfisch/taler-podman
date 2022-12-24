@@ -1,0 +1,68 @@
+server {
+	listen 443 ssl;
+	listen [::]:443 ssl;
+	server_name exchange.taler.example.org;
+
+	ssl_certificate /var/lib/dehydrated/certs/taler.example.org/fullchain.pem;
+	ssl_certificate_key /var/lib/dehydrated/certs/taler.example.org/privkey.pem;
+
+	location / {
+		proxy_pass http://localhost:8081/;
+	}
+
+	location ^~ /.well-known/acme-challenge {
+		alias /var/lib/dehydrated/acme-challenges;
+	}
+}
+
+server {
+	listen 443 ssl;
+	listen [::]:443 ssl;
+	server_name bank.taler.example.org;
+
+	ssl_certificate /var/lib/dehydrated/certs/taler.example.org/fullchain.pem;
+	ssl_certificate_key /var/lib/dehydrated/certs/taler.example.org/privkey.pem;
+
+	location /webui {
+		alias /home/taler/webui;
+	}
+
+	location = / {
+		return 302 /webui;
+	}
+
+	location / {
+		proxy_set_header X-Forwarded-Host "bank.taler.example.org";
+		proxy_set_header X-Forwarded-Proto "https";
+  		proxy_set_header X-Forwarded-Prefix "/";
+		proxy_set_header X-Forwarded-Port 443;
+
+		proxy_pass http://localhost:5016/;
+	}
+
+	location ^~ /.well-known/acme-challenge {
+		alias /var/lib/dehydrated/acme-challenges;
+	}
+}
+
+server {
+	listen 443 ssl;
+	listen [::]:443 ssl;
+	server_name merchant.taler.example.org;
+
+	ssl_certificate /var/lib/dehydrated/certs/taler.example.org/fullchain.pem;
+	ssl_certificate_key /var/lib/dehydrated/certs/taler.example.org/privkey.pem;
+
+	location / {
+		proxy_set_header X-Forwarded-Host "merchant.taler.example.org";
+		proxy_set_header X-Forwarded-Proto "https";
+  		proxy_set_header X-Forwarded-Prefix "/";
+		proxy_set_header X-Forwarded-Port 443;
+
+		proxy_pass http://localhost:8888/;
+	}
+
+	location ^~ /.well-known/acme-challenge {
+		alias /var/lib/dehydrated/acme-challenges;
+	}
+}
