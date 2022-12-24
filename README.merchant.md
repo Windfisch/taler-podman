@@ -7,10 +7,10 @@ can later use to buy beer, obviously.)
 
 ## Starting the container
 
-Build the containers:
+Build the container:
 
 ```bash
-./rebuild_containers.sh
+docker build --tag taler-merchant:latest -f taler-merchant.Dockerfile .
 ```
 
 Start the merchant container. Note the slash at the end of the `EXCHANGE_URL`.
