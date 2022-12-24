@@ -44,6 +44,8 @@ When transaction fees are zero, it might be advantageous to set the wire transfe
 to something very low. The merchant backend will wait this long until it redeems your talers
 into your bank account.
 
+You need to do this on every transaction, not as a global setting.
+
 ## Caution
 
 The merchant's database lives *inside the docker container*. Don't delete the container
