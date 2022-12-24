@@ -35,6 +35,15 @@ Then you need to fill out the merchant's details, and watch out for the followin
 
 Otherwise, the gray "Submit" button won't turn green.
 
+## Tips and Tricks
+
+When creating an order, it might be useful to `Clear` the refund deadline. This ensures
+that your money can instantly be wired to your account.
+
+When transaction fees are zero, it might be advantageous to set the wire transfer deadline
+to something very low. The merchant backend will wait this long until it redeems your talers
+into your bank account.
+
 ## Caution
 
 The merchant's database lives *inside the docker container*. Don't delete the container
