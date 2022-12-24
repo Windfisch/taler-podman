@@ -39,3 +39,6 @@ Otherwise, the gray "Submit" button won't turn green.
 
 The merchant's database lives *inside the docker container*. Don't delete the container
 or you will lose your database.
+
+The container does "trust on first use" on the exchange. Make sure your connection is not
+compromised when launching the container.
