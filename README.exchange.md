@@ -31,6 +31,8 @@ sudo rm -rf data  # clear database
 ./make_env.sh     # prepare environment etc.
 ```
 
+Adjust the exchange configuration in `exchange-config.skel` as needed.
+
 ## Starting the system
 
 Source the `.env` file and launch the containers
