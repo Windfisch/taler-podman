@@ -42,3 +42,7 @@ or you will lose your database.
 
 The container does "trust on first use" on the exchange. Make sure your connection is not
 compromised when launching the container.
+
+## Further reading
+
+https://docs.taler.net/taler-merchant-api-tutorial.html
