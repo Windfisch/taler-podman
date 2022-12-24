@@ -7,3 +7,11 @@ simple, especially in terms of security. (Works work `podman-compose`, too.)
 
 [Merchant Setup](README.merchant.md) if you are want to receive payments, e.g. to sell bottled caffeine or pixels in your LED strip.
 
+## Quick start
+
+Setup exchange and bank. Create and fill the `cashier` account and log into it using
+`https://bank.taler.example.org/webui`. Withdraw some money on the website, which should
+create a QR code. (If it doesn't, try again, or try opening the developer's console...)
+
+Scan the code with your android wallet or copy the link into your Firefox wallet. (The chrome
+wallet seems broken.)
