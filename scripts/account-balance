@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ x$1 == x ]; then
+	echo "Usage: $0 accountname"
+	exit 1
+fi
+
+docker exec taler-podman_libeufin_sandbox_1 bash -c 'LIBEUFIN_SANDBOX_URL=http://localhost:5016 LIBEUFIN_SANDBOX_USERNAME=admin LIBEUFIN_SANDBOX_PASSWORD="$LIBEUFIN_SANDBOX_ADMIN_PASSWORD" libeufin-cli sandbox bankaccount transactions '$1 | ./balance.py

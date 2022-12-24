@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ x$1 == x ]; then
+	echo "Usage: $0 <amount>"
+	exit 1
+fi
+
+docker exec taler-podman_libeufin_sandbox_1 bash -c 'libeufin-sandbox make-transaction --debit-account bank --credit-account cashier MANA:'$1' "Cashier restock"' && echo success
