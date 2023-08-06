@@ -46,6 +46,11 @@ into your bank account.
 
 You need to do this on every transaction, not as a global setting.
 
+## Point of sale terminal
+
+If your are in search for a simple browser based POS terminal, which even Android 5 can run,
+try [this one](https://github.com/SpitfireX/taler-pos).
+
 ## Caution
 
 The merchant's database lives *inside the docker container*. Don't delete the container
