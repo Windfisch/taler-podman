@@ -22,6 +22,11 @@ Build the containers:
 ./rebuild_containers.sh
 ```
 
+Adjust the exchange configuration in `exchange-config.skel` as needed. Adjust `BASE_URL`
+in the [docker-compose.yaml](docker-compose-yaml) file to match your publicly visible
+URL (i.e. where your nginx reverse proxy is serving; it should contain `https` and not
+contain `localhost`).
+
 Make sure that you start with a fresh and clean database. Having old databases around
 will not re-run the database setup, which can result in wrong passwords being set and
 general confusion. Then create a `.env` file with the appropriate passwords:
@@ -30,8 +35,6 @@ general confusion. Then create a `.env` file with the appropriate passwords:
 sudo rm -rf data  # clear database
 ./make_env.sh     # prepare environment etc.
 ```
-
-Adjust the exchange configuration in `exchange-config.skel` as needed.
 
 ## Starting the system
 
