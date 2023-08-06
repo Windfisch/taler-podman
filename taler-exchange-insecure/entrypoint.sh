@@ -26,7 +26,8 @@ taler-exchange-secmod-cs -L INFO -l /dev/stdout | tee /var/log/taler-exchange-se
 taler-exchange-secmod-rsa -L INFO -l /dev/stdout | tee /var/log/taler-exchange-secmod-rsa.log &
 taler-exchange-secmod-eddsa -L INFO -l /dev/stdout | tee /var/log/taler-exchange-secmod-eddsa.log &
 taler-exchange-transfer -L INFO -l /dev/stdout | tee /var/log/taler-exchange-transfer.log &
-taler-exchange-wirewatch -L INFO -l /var/log/taler-exchange-wirewatch.log &
+# as of v0.9.2, long-polling in the nexus is broken and always waits the full timeout. So we set it to 1s here.
+taler-exchange-wirewatch --longpoll-timeout=1s -L INFO -l /var/log/taler-exchange-wirewatch.log &
 
 taler-exchange-httpd -L DEBUG -l /dev/stdout | tee /var/log/taler-exchange-httpd.log &
 
