@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-pg_ctlcluster 13 main start
+pg_ctlcluster 15 main start
 
 if ! [ -e /config-done ]; then
 	echo "Performing one-time container setup"

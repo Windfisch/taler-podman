@@ -5,4 +5,4 @@ if [ x$1 == x ]; then
 	exit 1
 fi
 
-docker exec taler-podman_libeufin_sandbox_1 bash -c 'libeufin-sandbox make-transaction --debit-account bank --credit-account cashier $MYCURRENCY:'$1' "Cashier restock"' && echo success
+docker exec taler-podman_libeufin_sandbox_1 bash -c 'libeufin-sandbox make-transaction --debit-account admin --credit-account cashier $MYCURRENCY:'$1' "Cashier restock"' && echo success
