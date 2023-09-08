@@ -22,10 +22,8 @@ Build the containers:
 ./rebuild_containers.sh
 ```
 
-Adjust the exchange configuration in `exchange-config.skel` as needed. Adjust `BASE_URL`
-in the [docker-compose.yaml](docker-compose-yaml) file to match your publicly visible
-URL (i.e. where your nginx reverse proxy is serving; it should contain `https` and not
-contain `localhost`).
+Adjust the exchange configuration in `exchange-config.skel` and some of the environment
+variables in `make_env.sh` as needed.
 
 Make sure that you start with a fresh and clean database. Having old databases around
 will not re-run the database setup, which can result in wrong passwords being set and
@@ -76,7 +74,7 @@ amount of cash in your cashdesk.
 ## Stopping the system
 
 ```bash
-podman-compose down --timeout 1
+docker-compose down --timeout 1
 ```
 
 ## Withdrawing money, the old way
@@ -87,15 +85,15 @@ the bank's account using a provided subject.
 First, wire the transaction into the bank's account on the sandbox:
 
 ```bash
-user@host-system:taler-compose$ podman exec -it taler-compose_libeufin_sandbox_1 /bin/bash
+docker exec -it taler-compose_libeufin_sandbox_1 /bin/bash
 root@b23bfa4a27ab:/# LIBEUFIN_SANDBOX_USERNAME=admin LIBEUFIN_SANDBOX_PASSWORD=$LIBEUFIN_SANDBOX_ADMIN_PASSWORD LIBEUFIN_SANDBOX_URL=http://localhost:5016 libeufin-cli sandbox bankaccount simulate-incoming-transaction jrluser --debtor-iban DE123456 --debtor-bic SANDBOXX --debtor-name Fnord --amount MANA:5 --subject 'Taler Withdrawal PKAWS7YEG367744F9B8B7CKTC5KFPS7YH6RMD0NY52TV9TVCED6G'
 ```
 
 Then, fetch the transactions on the nexus:
 
 ```bash
-podman exec -it taler-compose_libeufin_nexus_1 /bin/bash
-root@ef194aa7d8bd:/# LIBEUFIN_NEXUS_URL=http://localhost:5017 LIBEUFIN_NEXUS_USERNAME=admin LIBEUFIN_NEXUS_PASSWORD=$ADMIN_PASSWORD  libeufin-cli accounts fetch-transactions nickname
+docker exec -it taler-compose_libeufin_nexus_1 /bin/bash
+root@ef194aa7d8bd:/# LIBEUFIN_NEXUS_URL=http://localhost:5017 LIBEUFIN_NEXUS_USERNAME=admin LIBEUFIN_NEXUS_PASSWORD=$ADMIN_PASSWORD libeufin-cli accounts fetch-transactions nickname
 ```
 
 ## Troubleshooting
@@ -103,7 +101,7 @@ root@ef194aa7d8bd:/# LIBEUFIN_NEXUS_URL=http://localhost:5017 LIBEUFIN_NEXUS_USE
 Exchange logs can be examined using
 
 ```bash
-user@host-system:taler-compose$ podman exec -it taler-compose_exchange_1 /bin/bash
+docker exec -it taler-compose_exchange_1 /bin/bash
 root@53e68ae5b360:/# cat /var/log/taler-exchange-*.log
 ```
 
