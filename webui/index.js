@@ -13328,7 +13328,7 @@ function getIbanFromPayto(url) {
 }
 var maybeRootPath = "https://bank.taler.example.org/demobanks/default/";
 function getBankBackendBaseUrl() {
-  const overrideUrl = localStorage.getItem("bank-base-url");
+  const overrideUrl = bankUiSettings.bankBaseUrl;
   return canonicalizeBaseUrl(overrideUrl ? overrideUrl : maybeRootPath);
 }
 function undefinedIfEmpty(obj) {
