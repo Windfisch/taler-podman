@@ -18,7 +18,7 @@ services:
       # consumes:
       LIBEUFIN_SANDBOX_DB_CONNECTION: "jdbc:postgresql://postgres/sandbox?user=sandbox&password=${SANDBOX_DB_PASSWORD}"
       MYCURRENCY: "${MYCURRENCY}"
-      EXCHANGE_URL: "https://taler.windfis.ch/"
+      EXCHANGE_URL: "${EXCHANGE_BASE_URL}"
       PAYTO_URL: "payto://iban/${MYIBAN}?receiver-name=MyExchange"
       # provides:
       LIBEUFIN_SANDBOX_ADMIN_PASSWORD: "${SANDBOX_ADMIN_PASSWORD}"
@@ -54,7 +54,7 @@ services:
       - "8081:8081"
     environment:
       # provides:
-      BASE_URL: "https://taler.windfis.ch/"
+      BASE_URL: "${EXCHANGE_BASE_URL}"
       # consumes:
       MYIBAN: "${MYIBAN}"
       MYCURRENCY: "${MYCURRENCY}"

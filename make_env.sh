@@ -14,6 +14,7 @@ export NEXUS_TALER_PASSWORD='`pwgen -s 20`'
 export EXCHANGE_DB_PASSWORD='`pwgen -s 20`'
 export MYCURRENCY=MANA
 export MYIBAN=DE827320
+export EXCHANGE_BASE_URL=https://exchange.taler.example.org
 FNORD
 
 . .env
